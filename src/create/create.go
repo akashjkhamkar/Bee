@@ -10,6 +10,8 @@ var function_files = map[string] [] string {
 	"python": python_files,
 }
 
+// TODO: in binary installation, the templates should be kept in the /bin or somewhere in the ~
+
 func copy_function_files(files [] string, function_folder string) {
 	for _, file := range files {
 		src := "templates/python/" + file
@@ -33,13 +35,14 @@ func Create(runtime , function_name string) {
 	copy_function_files(files, function_name)
 
 	// YAML file
-	// the name
-	// runtime
-	// auto-scaling
-	// replicas: 1
-	// use some yaml generator to generate the file
-}
+	config := utils.Yaml_config{
+		Function_name: function_name,
+		Runtime: runtime,
+		Replicas: 1,
+	}
 
+	utils.Create_yaml_config_file(config, function_name + "/config.yaml")
+}
 
 var python_files = [] string {
 	"requirements.txt",
