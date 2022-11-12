@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 
 	"bee/src/create"
@@ -13,7 +11,6 @@ var createCmd = &cobra.Command{
     Short:  "creates the empty template for the function",
     Args:  cobra.ExactArgs(2),
     Run: func(cmd *cobra.Command, args []string) {
-        fmt.Printf("creating function %s using runtime %s ...\n", args[0], args[1])
         create.Create(args[0], args[1])
     },
 }
