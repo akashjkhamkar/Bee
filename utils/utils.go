@@ -17,6 +17,22 @@ type Yaml_config struct {
 	Autoscaling bool;
 }
 
+func Read_yaml_config_file(filename string) Yaml_config {
+	yamlFile, err := ioutil.ReadFile(filename)
+    if err != nil {
+        log.Fatalf("Error reading YAML file: %s\n", err)
+    }
+
+    var yamlConfig Yaml_config
+    err = yaml.Unmarshal(yamlFile, &yamlConfig)
+
+	if err != nil {
+        fmt.Printf("Error parsing YAML file: %s\n", err)
+    }
+
+	return yamlConfig
+}
+
 func Create_yaml_config_file(data Yaml_config, filename string) {
 	yamlData, err := yaml.Marshal(&data)
 

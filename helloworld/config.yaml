@@ -1,0 +1,4 @@
+function_name: helloworld
+runtime: python
+replicas: 1
+autoscaling: false

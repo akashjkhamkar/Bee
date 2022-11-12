@@ -50,5 +50,7 @@ func Create(runtime , function_name string) {
 
 var python_files = [] string {
 	"requirements.txt",
-	"python-function.py",
+	"function.py",
+	"flask-listener.py",
+	"Dockerfile",
 }
