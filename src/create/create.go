@@ -2,6 +2,7 @@ package create
 
 import (
 	"bee/utils"
+	"fmt"
 	"log"
 	"os"
 )
@@ -42,6 +43,9 @@ func Create(runtime , function_name string) {
 	}
 
 	utils.Create_yaml_config_file(config, function_name + "/config.yaml")
+
+	// Tell user that template was successfully created
+	fmt.Printf("Template successfully created inside folder '%s'\n", function_name)
 }
 
 var python_files = [] string {

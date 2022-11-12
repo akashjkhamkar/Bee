@@ -8,10 +8,10 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-    Use:  "bee",
-    Short: "bee - a simple serverless functions framework, based on kubernetes",
-    Long: `bee is a elite serverless functions framework (not kidding).
-One can use bee to create simple functions and deploy them directy in the k8s cluster.`,
+    Use:  "Bee",
+    Short: "Bee - a simple serverless functions framework, based on kubernetes",
+    Long: `Bee is an elite serverless functions framework (not kidding).
+One can use bee to create simple functions and deploy them directy in their k8s cluster.`,
     Run: func(cmd *cobra.Command, args []string) {
 
     },

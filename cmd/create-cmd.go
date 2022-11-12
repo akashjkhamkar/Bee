@@ -8,7 +8,7 @@ import (
 
 var createCmd = &cobra.Command{
     Use:   "create <language, eg: python, go> <function-name>",
-    Short:  "creates the empty template for the function",
+    Short:  "Creates the empty template for the function",
     Args:  cobra.ExactArgs(2),
     Run: func(cmd *cobra.Command, args []string) {
         create.Create(args[0], args[1])
