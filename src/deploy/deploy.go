@@ -8,7 +8,7 @@ import (
 	"os/exec"
 )
 
-func create_deployment_file(function_name, repository string, autoscaling bool, replicas int) {
+func create_deployment_file(function_name, repository, path string, autoscaling bool, replicas int) {
 	// Deployment file
 	deployment_config := utils.Yaml_deployment{}
 
@@ -45,7 +45,7 @@ func create_deployment_file(function_name, repository string, autoscaling bool, 
 	spec.Template.Spec.Containers = containers
 	deployment_config.Spec = spec
 
-	utils.Create_yaml_config_file(deployment_config, function_name + "/Deployment.yaml")
+	utils.Create_yaml_config_file(deployment_config, path + "/Deployment.yaml")
 }
 
 func delete_existing_deployment(function_name string) {
@@ -58,12 +58,12 @@ func delete_existing_deployment(function_name string) {
 	exec.Command(app, arg0, arg1, arg2)
 }
 
-func apply_deployment(path string) {
+func apply_deployment(path, file string) {
 	// Delete the exisiting deployment with the same name
 	app := "kubectl"
 	arg0 := "apply"
 	arg1 := "-f"
-	arg2 := path + "/Deployment.yaml"
+	arg2 := path + "/" + file
 
 	cmd := exec.Command(app, arg0, arg1, arg2)
 	cmd.Stdout = os.Stdout
@@ -73,6 +73,24 @@ func apply_deployment(path string) {
 	if err != nil {
 		log.Fatal("Something went wrong while applying the deployment. ", err)
 	}
+}
+
+func create_service_file(function_name, path string) {
+	service_config := utils.Yaml_service_config{
+		APIVersion: "v1",
+		Kind: "Service",
+	}
+
+	service_config.Metadata.Name = "bee-" + function_name + "-service"
+	service_config.Spec.Selector.BeeFunction = function_name
+	port_config := utils.Service_port{
+		Protocol: "TCP",
+		Port: 80,
+		TargetPort: 8000,
+	}
+	service_config.Spec.Ports[0] = port_config
+
+	utils.Create_yaml_config_file(service_config, path + "/Service.yaml")
 }
 
 func Deploy(path string) {
@@ -87,8 +105,11 @@ func Deploy(path string) {
 		return
 	}
 
-	create_deployment_file(function_name, repository, autoscaling, replicas)
 	delete_existing_deployment(function_name)
-	apply_deployment(path)
+	create_deployment_file(function_name, repository, path, autoscaling, replicas)
+	apply_deployment(path, "Deployment.yaml")
+
+	create_service_file(function_name, path)
+	apply_deployment(path, "Service.yaml")
 	// create a service for the deployment
 }

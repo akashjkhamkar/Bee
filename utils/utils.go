@@ -48,6 +48,25 @@ type Yaml_deployment struct {
 	} `yaml:"spec"`
 }
 
+type Yaml_service_config struct {
+	APIVersion string `yaml:"apiVersion"`
+	Kind       string `yaml:"kind"`
+	Metadata   struct {
+		Name string `yaml:"name"`
+	} `yaml:"metadata"`
+	Spec struct {
+		Selector struct {
+			BeeFunction string `yaml:"bee-function"`
+		} `yaml:"selector"`
+		Ports [1] Service_port `yaml:"ports"`
+	} `yaml:"spec"`
+}
+
+type Service_port struct {
+	Protocol   string `yaml:"protocol"`
+	Port       int    `yaml:"port"`
+	TargetPort int    `yaml:"targetPort"`
+}
 type Container_config struct {
 	Name  string `yaml:"name"`
 	Image string `yaml:"image"`
