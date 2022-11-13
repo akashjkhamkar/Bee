@@ -13,8 +13,10 @@ import (
 type Yaml_config struct {
 	Function_name string;
 	Runtime string;
+	Repository string;
 	Replicas int;
 	Autoscaling bool;
+	Isbuilt bool;
 }
 
 func Read_yaml_config_file(filename string) Yaml_config {

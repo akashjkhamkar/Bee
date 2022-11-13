@@ -27,4 +27,7 @@ func Build(path string) {
     if err != nil {
         log.Fatal(err)
     }
+
+	configs.Isbuilt = true
+	utils.Create_yaml_config_file(configs, config_file)
 }

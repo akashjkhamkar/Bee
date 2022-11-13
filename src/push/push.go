@@ -1,6 +1,8 @@
 package push
 
 import (
+	"bee/utils"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -39,7 +41,19 @@ func push(repository string) {
 	}
 }
 
-func Push(function_name, repository string) {
-	tag(function_name, repository)
+func Push(path, repository string) {
+	config_file := path + "/config.yaml"
+	configs := utils.Read_yaml_config_file(config_file)
+
+	if !configs.Isbuilt {
+		fmt.Println("Build the image first using 'bee build'")
+		return
+	}
+
+	configs.Repository = repository
+
+	tag(configs.Function_name, repository)
 	push(repository)
+
+	utils.Create_yaml_config_file(configs, config_file)
 }

@@ -1,4 +1,6 @@
 function_name: helloworld
 runtime: python
+repository: xatriya/bee4
 replicas: 1
 autoscaling: false
+isbuilt: true
