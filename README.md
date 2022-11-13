@@ -6,7 +6,7 @@
 
 documentation is on it's way, 
 
-Just hold on we're going home
-It's hard to do these things alone
-Just hold on we're going home
-- drake, 2013
+Just hold on we're going home\
+It's hard to do these things alone\
+Just hold on we're going home\
+-- drake, 2013
