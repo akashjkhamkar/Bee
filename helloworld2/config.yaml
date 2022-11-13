@@ -1,6 +1,6 @@
 function_name: helloworld2
 runtime: python
-repository: ""
+repository: xatriya/bee5
 replicas: 1
 autoscaling: false
-isbuilt: false
+isbuilt: true

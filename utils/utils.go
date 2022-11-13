@@ -38,7 +38,7 @@ type Yaml_deployment struct {
 		Template struct {
 			Metadata struct {
 				Labels struct {
-					App string `yaml:"app"`
+					BeeFunction string `yaml:"bee-function"`
 				} `yaml:"labels"`
 			} `yaml:"metadata"`
 			Spec struct {

@@ -12,10 +12,10 @@ spec:
   template:
     metadata:
       labels:
-        app: bee-helloworld2
+        bee-function: helloworld2
     spec:
       containers:
       - name: helloworld2
-        image: ""
+        image: xatriya/bee5
         ports:
         - containerPort: 8000
