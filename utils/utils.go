@@ -19,6 +19,45 @@ type Yaml_config struct {
 	Isbuilt bool;
 }
 
+type Yaml_deployment struct {
+	APIVersion string `yaml:"apiVersion"`
+	Kind       string `yaml:"kind"`
+	Metadata   struct {
+		Name   string `yaml:"name"`
+		Labels struct {
+			BeeFunction string `yaml:"bee-function"`
+		} `yaml:"labels"`
+	} `yaml:"metadata"`
+	Spec struct {
+		Replicas int `yaml:"replicas"`
+		Selector struct {
+			MatchLabels struct {
+				BeeFunction string `yaml:"bee-function"`
+			} `yaml:"matchLabels"`
+		} `yaml:"selector"`
+		Template struct {
+			Metadata struct {
+				Labels struct {
+					App string `yaml:"app"`
+				} `yaml:"labels"`
+			} `yaml:"metadata"`
+			Spec struct {
+				Containers [1] Container_config
+			} `yaml:"spec"`
+		} `yaml:"template"`
+	} `yaml:"spec"`
+}
+
+type Container_config struct {
+	Name  string `yaml:"name"`
+	Image string `yaml:"image"`
+	Ports [1] Ports_config `yaml:"ports"`
+}
+
+type Ports_config struct {
+	ContainerPort int `yaml:"containerPort"`
+}
+
 func Read_yaml_config_file(filename string) Yaml_config {
 	yamlFile, err := ioutil.ReadFile(filename)
     if err != nil {
@@ -35,7 +74,23 @@ func Read_yaml_config_file(filename string) Yaml_config {
 	return yamlConfig
 }
 
-func Create_yaml_config_file(data Yaml_config, filename string) {
+func Read_yaml_deployment_file(filename string) map[interface{}]interface{} {
+	m := make(map[interface{}]interface{})
+
+	yamlFile, err := ioutil.ReadFile(filename)
+    if err != nil {
+        log.Fatalf("Error reading YAML file: %s\n", err)
+    }
+
+	err = yaml.Unmarshal([]byte(yamlFile), &m)
+	if err != nil {
+		log.Fatalf("error while reading the Deployments file: %v", err)
+	}
+
+	return m
+}
+
+func Create_yaml_config_file(data interface{}, filename string) {
 	yamlData, err := yaml.Marshal(&data)
 
     if err != nil {

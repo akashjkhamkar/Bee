@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bee-helloworld2
+  labels:
+    bee-function: helloworld2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      bee-function: helloworld2
+  template:
+    metadata:
+      labels:
+        app: bee-helloworld2
+    spec:
+      containers:
+      - name: helloworld2
+        image: ""
+        ports:
+        - containerPort: 8000

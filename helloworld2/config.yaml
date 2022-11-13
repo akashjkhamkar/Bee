@@ -1,0 +1,6 @@
+function_name: helloworld2
+runtime: python
+repository: ""
+replicas: 1
+autoscaling: false
+isbuilt: false

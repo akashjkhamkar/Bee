@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bee-function-name
+  labels:
+    bee-function: function-name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      bee-function: function-name
+  template:
+    metadata:
+      labels:
+        app: bee-function-name
+    spec:
+      containers:
+      - name: bee-function-name
+        image: hub-user/repo-name
+        ports:
+        - containerPort: 8000
