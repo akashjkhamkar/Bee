@@ -8,7 +8,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-    Use:  "Bee",
+    Use:  "bee",
     Short: "Bee - a simple serverless functions framework, based on kubernetes",
     Long: `Bee is an elite serverless functions framework (not kidding).
 One can use bee to create simple functions and deploy them directy in their k8s cluster.`,
