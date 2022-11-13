@@ -1,6 +1,0 @@
-function_name: helloworld2
-runtime: python
-repository: xatriya/bee5
-replicas: 1
-autoscaling: false
-isbuilt: true
