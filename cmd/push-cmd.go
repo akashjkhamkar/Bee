@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bee/src/push"
+	"bee/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -11,7 +12,8 @@ var pushCmd = &cobra.Command{
     Short:  "Pushes the image to the repository, so that kubernetes can pull it while deploying.",
     Args:  cobra.ExactArgs(2),
     Run: func(cmd *cobra.Command, args []string) {
-        push.Push(args[0], args[1])
+        path := utils.Format_path(args[0])
+        push.Push(path, args[1])
     },
 }
 

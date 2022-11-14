@@ -16,7 +16,11 @@ func delete_existing_deployment(function_name string) {
 	arg1 := "deployment"
 	arg2 := "bee-" + function_name
 
-	exec.Command(app, arg0, arg1, arg2)
+	cmd := exec.Command(app, arg0, arg1, arg2)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	cmd.Run()
 }
 
 func apply_deployment(path, file string) {

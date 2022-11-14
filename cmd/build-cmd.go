@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"bee/src/build"
+	"bee/utils"
 )
 
 var buildCmd = &cobra.Command{
@@ -11,7 +12,8 @@ var buildCmd = &cobra.Command{
     Short:  "Builds the docker image for the function.",
     Args:  cobra.ExactArgs(1),
     Run: func(cmd *cobra.Command, args []string) {
-        build.Build(args[0])
+        path := utils.Format_path(args[0])
+        build.Build(path)
     },
 }
 

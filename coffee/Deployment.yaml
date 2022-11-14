@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bee-coffee
+  labels:
+    bee-function: coffee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      bee-function: coffee
+  template:
+    metadata:
+      labels:
+        bee-function: coffee
+    spec:
+      containers:
+      - name: coffee
+        image: xatriya/coffee
+        ports:
+        - containerPort: 8000

@@ -154,3 +154,15 @@ func Copy(src, dst string) (int64, error) {
 	nBytes, err := io.Copy(destination, source)
 	return nBytes, err
 }
+
+func Format_path(path string) string {
+	end_char := path[len(path) - 1]
+
+	if end_char == '/' && len(path) == 1{
+		return path
+	} else if end_char == '/' {
+		return path
+	} else {
+		return path + "/"
+	}
+}
