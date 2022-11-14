@@ -16,6 +16,9 @@ type Yaml_config struct {
 	Repository string;
 	Replicas int;
 	Autoscaling bool;
+	Min_replicas int;
+	Max_replicas int;
+	Cpu_percent int;
 	Isbuilt bool;
 }
 
