@@ -9,13 +9,14 @@ import (
 
 var function_files = map[string] [] string {
 	"python": python_files,
+	"golang": golang_files,
 }
 
 // TODO: in binary installation, the templates should be kept in the /bin or somewhere in the ~
 
-func copy_function_files(files [] string, function_folder string) {
+func copy_function_files(files [] string, function_folder string, runtime string) {
 	for _, file := range files {
-		src := "templates/python/" + file
+		src := "templates/" + runtime + "/" + file
 		utils.Copy(src, function_folder + "/" + file)
 	}
 }
@@ -33,7 +34,7 @@ func Create(runtime , function_name string) {
 	}
 
 	// Copy the skeleton code into the folder
-	copy_function_files(files, function_name)
+	copy_function_files(files, function_name, runtime)
 
 	// YAML configs file
 	config := utils.Yaml_config{
@@ -52,4 +53,10 @@ var python_files = [] string {
 	"function.py",
 	"flask-listener.py",
 	"Dockerfile",
+}
+
+var golang_files = [] string {
+	"function.go",
+	"Dockerfile",
+	"golang-listener.go",
 }
